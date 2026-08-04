@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCA-F Prep</title>
+<style>
+  :root{
+    --ink:#14181f; --paper:#fff; --accent:#23407a; --accent-soft:#eaeff8;
+    --line:#d7dce4; --muted:#5b6472; --good:#1a6b38;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:var(--sans); color:var(--ink); margin:0; line-height:1.5;
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    background:
+      radial-gradient(1200px 500px at 50% -10%, #dfe7f4 0%, transparent 60%),
+      #eef0f3;
+    padding:40px 16px;
+  }
+  .card{max-width:680px; width:100%;}
+
+  .term{
+    font-family:var(--mono); font-size:12.5px; color:var(--accent);
+    background:var(--accent-soft); border:1px solid #cdd9ec; border-radius:8px;
+    padding:10px 14px; margin-bottom:22px;
+  }
+  .term .muted{color:var(--muted);}
+
+  h1{font-size:34px; letter-spacing:-.02em; margin:0 0 6px;}
+  .sub{color:var(--muted); font-size:15px; margin:0 0 26px;}
+
+  a.tile{
+    display:block; text-decoration:none; color:inherit;
+    background:var(--paper); border:1px solid var(--line); border-radius:13px;
+    padding:20px 22px; margin:12px 0; transition:.14s;
+  }
+  a.tile:hover{border-color:var(--accent); box-shadow:0 4px 20px rgba(35,64,122,.12); transform:translateY(-1px);}
+  .tile .eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:6px;}
+  .tile h2{margin:0 0 4px; font-size:19px;}
+  .tile p{margin:0; color:var(--muted); font-size:14px;}
+  .tile .go{float:right; color:var(--accent); font-weight:700; font-size:20px; margin-top:-32px;}
+
+  .foot{margin-top:24px; font-size:12.5px; color:var(--muted); font-family:var(--mono);}
+  .foot b{color:var(--ink); font-weight:600;}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="term">
+      $ prep --exam CCA-F <span class="muted">&nbsp;# Claude Certified Architect — Foundations</span>
+    </div>
+
+    <h1>CCA-F Prep</h1>
+    <p class="sub">Two tools for the sprint to certification: a full mock exam and a two-week study plan.</p>
+
+    <a class="tile" href="/exam">
+      <span class="go">→</span>
+      <div class="eyebrow">Practice</div>
+      <h2>60-Question Mock Exam</h2>
+      <p>Full-length, blueprint-weighted, self-scoring. 120-minute timer, per-domain breakdown, and an explanation on every question.</p>
+    </a>
+
+    <a class="tile" href="/guide">
+      <span class="go">→</span>
+      <div class="eyebrow">Plan</div>
+      <h2>2-Week Study Guide</h2>
+      <p>A compressed sprint prioritized to the heaviest-weighted domains, with the courses and official docs to hit each day. Print-to-PDF ready.</p>
+    </a>
+
+    <div class="foot">
+      Pass mark <b>720/1000</b> (scaled) &middot; 60 questions / 120 min &middot; 5 domains
+    </div>
+  </div>
+</body>
+</html>

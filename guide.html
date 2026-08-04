@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCA-F — 2-Week Sprint Study Guide</title>
+<style>
+  :root{
+    --ink:#14181f;
+    --paper:#ffffff;
+    --accent:#23407a;
+    --accent-soft:#eaeff8;
+    --line:#d7dce4;
+    --muted:#5b6472;
+    --warn:#a15a06;
+    --warn-soft:#fbf1e0;
+    --danger:#b0201b;
+    --good:#1a6b38;
+    --mono:ui-monospace,"SF Mono","SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+
+  html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:#f2f3f5;
+    margin:0;
+    line-height:1.5;
+    font-size:15px;
+  }
+
+  .sheet{
+    max-width:8.5in;
+    margin:24px auto;
+    background:var(--paper);
+    padding:0.85in 0.9in 1in;
+    box-shadow:0 2px 18px rgba(20,24,31,.12);
+  }
+
+  /* ---- screen-only helper banner ---- */
+  .print-hint{
+    max-width:8.5in;
+    margin:24px auto -6px;
+    background:var(--accent);
+    color:#fff;
+    padding:12px 18px;
+    border-radius:8px;
+    font-size:13.5px;
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
+  .print-hint kbd{
+    font-family:var(--mono);
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:4px;
+    padding:1px 6px;
+    font-size:12px;
+  }
+
+  /* ---- masthead ---- */
+  header.mast{
+    border-bottom:3px solid var(--accent);
+    padding-bottom:16px;
+    margin-bottom:22px;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 6px;
+  }
+  h1{
+    font-size:30px;
+    line-height:1.1;
+    margin:0 0 10px;
+    letter-spacing:-.01em;
+  }
+  .subline{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 18px;
+    font-size:13.5px;
+    color:var(--muted);
+    margin-top:6px;
+  }
+  .subline b{color:var(--ink);font-weight:600;}
+
+  h2{
+    font-size:13px;
+    font-family:var(--mono);
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    border-bottom:1px solid var(--line);
+    padding-bottom:6px;
+    margin:34px 0 16px;
+  }
+  h3{
+    font-size:17px;
+    margin:0 0 4px;
+  }
+  h4{
+    font-size:13px;
+    font-family:var(--mono);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--muted);
+    margin:16px 0 6px;
+  }
+  p{margin:0 0 10px;}
+  a{color:var(--accent);word-break:break-word;}
+
+  code, .mono{
+    font-family:var(--mono);
+    font-size:.87em;
+    background:#f0f2f5;
+    padding:1px 5px;
+    border-radius:4px;
+  }
+
+  /* ---- week banner ---- */
+  .week-banner{
+    background:var(--accent);
+    color:#fff;
+    padding:12px 18px;
+    border-radius:8px;
+    margin:30px 0 18px;
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+  }
+  .week-banner .wk{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    opacity:.85;
+  }
+  .week-banner .wt{font-size:18px;font-weight:700;}
+
+  /* ---- domain table ---- */
+  table.domains{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+    margin:6px 0 4px;
+  }
+  table.domains th{
+    background:var(--accent-soft);
+    text-align:left;
+    padding:9px 11px;
+    font-size:11.5px;
+    font-family:var(--mono);
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--accent);
+    border-bottom:1px solid var(--line);
+  }
+  table.domains td{
+    padding:9px 11px;
+    border-bottom:1px solid var(--line);
+    vertical-align:middle;
+  }
+  table.domains tr.weak td{ background:var(--warn-soft); }
+  .score-bad{color:var(--danger);font-weight:700;}
+  .score-ok{color:var(--good);font-weight:600;}
+  .tag{
+    font-family:var(--mono);
+    font-size:11px;
+    padding:2px 7px;
+    border-radius:20px;
+    white-space:nowrap;
+  }
+  .tag.repair{background:var(--warn-soft);color:var(--warn);border:1px solid #e6cfa6;}
+  .tag.reinforce{background:#eef3ee;color:var(--good);border:1px solid #c5ddca;}
+  .tag.light{background:#eef0f3;color:var(--muted);border:1px solid #dbe0e7;}
+
+  /* ---- day block ---- */
+  .day{
+    border-left:3px solid var(--accent);
+    padding:2px 0 2px 16px;
+    margin:0 0 22px;
+  }
+  .day .daylabel{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+  }
+  .day.rest{border-left-color:var(--muted);}
+  .day.rest .daylabel{color:var(--muted);}
+  .day.exam{border-left-color:var(--danger);}
+  .day.exam .daylabel{color:var(--danger);}
+
+  .resline{font-size:13.5px;margin:2px 0;}
+  .resline .k{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    margin-right:6px;
+  }
+
+  /* ---- checklist ---- */
+  ul.check{list-style:none;padding:0;margin:8px 0 6px;}
+  ul.check li{
+    position:relative;
+    padding:3px 0 3px 26px;
+    font-size:14px;
+  }
+  ul.check li::before{
+    content:"";
+    position:absolute;
+    left:0; top:5px;
+    width:13px;height:13px;
+    border:1.5px solid var(--accent);
+    border-radius:3px;
+  }
+  ul.plain{margin:6px 0;padding-left:20px;}
+  ul.plain li{margin:3px 0;font-size:14px;}
+
+  /* ---- callout ---- */
+  .callout{
+    background:var(--accent-soft);
+    border:1px solid #cdd9ec;
+    border-radius:8px;
+    padding:14px 16px;
+    margin:16px 0;
+  }
+  .callout.warn{background:var(--warn-soft);border-color:#e6cfa6;}
+  .callout h4{margin-top:0;color:var(--accent);}
+  .callout.warn h4{color:var(--warn);}
+  .callout ul{margin:6px 0 0;}
+
+  .footer{
+    margin-top:34px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    font-size:12px;
+    color:var(--muted);
+  }
+
+  /* ============ PRINT ============ */
+  @page{ size:letter; margin:0.7in; }
+
+  @media print{
+    body{background:#fff;font-size:10.7pt;line-height:1.42;}
+    .print-hint{display:none;}
+    .sheet{max-width:none;margin:0;padding:0;box-shadow:none;}
+    h1{font-size:23pt;}
+    h2{font-size:10.5pt;margin-top:20pt;}
+    h3{font-size:12.5pt;}
+    a{color:var(--accent);text-decoration:none;}
+    .day,table.domains,.callout,.week-banner,header.mast{ break-inside:avoid; }
+    .break-before{ break-before:page; }
+    .week-banner{ break-after:avoid; }
+    h3,h4{ break-after:avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="print-hint" style="justify-content:space-between;">
+  <a href="/" style="color:#fff;font-weight:700;text-decoration:none;white-space:nowrap;">← CCA-F Prep</a>
+  <span>🖨️ To save as PDF: press <kbd>Ctrl/Cmd</kbd> + <kbd>P</kbd>, then choose <b>Save as PDF</b>. This banner won't print.</span>
+</div>
+
+<div class="sheet">
+
+  <header class="mast">
+    <p class="eyebrow">Claude Certified Architect — Foundations</p>
+    <h1>2-Week Sprint Study Guide</h1>
+    <div class="subline">
+      <span><b>Goal:</b> Pass CCA-F in 2 weeks (3-week fallback included)</span>
+      <span><b>Status:</b> 75% on first practice test</span>
+      <span><b>Completed:</b> Building with the Claude API</span>
+    </div>
+  </header>
+
+  <h2>Exam facts — know these before you schedule</h2>
+  <ul class="plain">
+    <li><b>Format:</b> 60 scenario-based multiple-choice questions, 4 options, 1 correct.</li>
+    <li><b>Time:</b> 120 minutes (2 min/question — a comfortable pace).</li>
+    <li><b>Pass mark:</b> 720 / 1000 — a <b>scaled</b> score, not a raw percentage. A real passer scored 44/60 (73% raw) → 738, one wrong answer from failing. <b>Aim for ~80%+ raw for margin.</b></li>
+    <li><b>No penalty for guessing</b> — answer every question, never leave one blank.</li>
+    <li><b>Delivery:</b> Online proctored or Pearson VUE center. Closed-book, no AI assistance.</li>
+    <li><b>Cost:</b> ~$125 / attempt (Exam Guide v0.2, June 30 2026).</li>
+  </ul>
+
+  <div class="callout warn">
+    <h4>Do this today</h4>
+    <p style="margin:0;">Register and lock a test date for the end of Week 2. A committed date is the single biggest driver of finishing on time — and this cert is tied to your promotion.</p>
+  </div>
+
+  <h4>Domain weights — why the plan is ordered this way</h4>
+  <table class="domains">
+    <thead>
+      <tr><th>Domain</th><th>Weight</th><th>Your score</th><th>Priority</th></tr>
+    </thead>
+    <tbody>
+      <tr class="weak"><td>Agentic Architecture &amp; Orchestration</td><td>27%</td><td class="score-bad">68%</td><td><span class="tag repair">#1 · repair</span></td></tr>
+      <tr class="weak"><td>Claude Code Config &amp; Workflows</td><td>20%</td><td class="score-bad">71%</td><td><span class="tag repair">#2 · repair</span></td></tr>
+      <tr><td>Prompt Engineering &amp; Structured Output</td><td>20%</td><td class="score-ok">80%</td><td><span class="tag reinforce">reinforce</span></td></tr>
+      <tr><td>Tool Design &amp; MCP Integration</td><td>18%</td><td class="score-ok">83%</td><td><span class="tag reinforce">reinforce</span></td></tr>
+      <tr><td>Context Management &amp; Reliability</td><td>15%</td><td class="score-ok">80%</td><td><span class="tag light">light</span></td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13.5px;color:var(--muted);">Your two weakest domains are your two heaviest-weighted domains — together <b>47% of the exam</b>. Week 1 closes those gaps; Week 2 reinforces strengths and runs simulations.</p>
+
+  <h2>The exam's hidden grading logic — memorize these tiebreakers</h2>
+  <p>Every question shows 3–4 plausible answers. When stuck, the "architecturally correct" choice almost always follows these:</p>
+  <ul class="plain">
+    <li><b>Simplest robust solution wins</b> — don't add a subagent / classifier / memory layer a scenario doesn't need.</li>
+    <li><b>Better tool description</b> before a routing classifier.</li>
+    <li><b>Programmatic enforcement</b> before a stronger prompt (validate/retry in code &gt; "ask nicely").</li>
+    <li><b>Explicit context passing</b> before a shared memory layer.</li>
+    <li><b>Escalate to a human</b> at defined thresholds rather than letting an agent guess on low confidence.</li>
+    <li>Use <code>stop_reason</code> to control loop flow — never a fixed loop count.</li>
+  </ul>
+
+  <!-- ================= WEEK 1 ================= -->
+  <div class="week-banner">
+    <span class="wk">Week 1</span><span class="wt">Repair the weak domains</span>
+  </div>
+
+  <div class="day">
+    <span class="daylabel">Days 1–3 · Agentic Architecture &amp; Orchestration — 27%, weakest</span>
+    <div class="resline"><span class="k">Course</span>Introduction to Subagents (Anthropic Academy)</div>
+    <div class="resline"><span class="k">Docs</span><a href="https://docs.claude.com/en/api/agent-sdk/overview">Claude Agent SDK overview</a> · <a href="https://docs.claude.com/en/docs/build-with-claude/overview">Building with Claude</a></div>
+    <h4>Master these</h4>
+    <ul class="check">
+      <li><b>Agentic loop + <code>stop_reason</code>:</b> <code>tool_use</code> → run tool, append result, loop back; <code>end_turn</code> → done, exit; <code>max_tokens</code> → truncated, handle it. Most "broken loop" scenarios are mishandled <code>stop_reason</code>.</li>
+      <li><b>One loop vs. subagents — the core judgment call.</b> Subagents for (a) context isolation, (b) parallel independent subtasks, (c) specialization. Single loop when linear and small — over-decomposing adds latency, tokens, failure points.</li>
+      <li><b>Hub-and-spoke / orchestrator-worker:</b> coordinator decomposes → dispatches to workers → synthesizes. Subagents run in their own context window and return a clean summary.</li>
+      <li><b>Context budgets &amp; delegation:</b> subagents don't inherit the parent's full context; pass scoped context explicitly. Custom agents live in <code>.claude/agents</code>; the SDK uses <code>AgentDefinition</code>.</li>
+      <li><b>Parallel vs. sequential</b> subagent execution and when each fits.</li>
+    </ul>
+    <p style="font-size:13.5px;color:var(--muted);"><b>Self-check:</b> For 5 mini-scenarios, decide single-loop vs. subagents and justify in one sentence.</p>
+  </div>
+
+  <div class="day">
+    <span class="daylabel">Days 4–6 · Claude Code Configuration &amp; Workflows — 20%, 2nd weakest</span>
+    <div class="resline"><span class="k">Courses</span>Claude Code 101 (fast) → Claude Code in Action</div>
+    <div class="resline"><span class="k">Docs</span><a href="https://docs.claude.com/en/docs/claude-code/overview">Claude Code overview</a> · <a href="https://docs.claude.com/en/docs/claude-code/settings">Settings</a> · <a href="https://docs.claude.com/en/docs/claude-code/hooks">Hooks</a> · <a href="https://docs.claude.com/en/docs/claude-code/slash-commands">Slash commands</a></div>
+    <h4>Master these</h4>
+    <ul class="check">
+      <li><b><code>CLAUDE.md</code>:</b> what belongs in it, project vs. user scope, how it shapes agent behavior.</li>
+      <li><b>Slash commands:</b> built-in vs. custom, and where custom commands are defined.</li>
+      <li><b>Hooks:</b> the lifecycle events, and when a hook is the right enforcement point vs. a prompt instruction.</li>
+      <li><b>Permissions / settings:</b> allow/deny tooling and how config is resolved.</li>
+      <li><b>CI/CD &amp; MCP-into-Code:</b> headless/automation patterns and wiring MCP servers into Claude Code.</li>
+    </ul>
+    <p style="font-size:13.5px;color:var(--muted);"><b>Self-check:</b> Answer "where would you enforce X?" — <code>CLAUDE.md</code>, a hook, a permission rule, or a slash command — for several examples.</p>
+  </div>
+
+  <div class="day rest">
+    <span class="daylabel">Day 7 · Checkpoint + rest</span>
+    <ul class="check">
+      <li>Retake your practice test (or a fresh set). <b>Target: Agentic and Claude Code both ≥ 80% now.</b></li>
+      <li>Log every miss into a running <b>error list</b> — this becomes your final-week cram sheet.</li>
+      <li>Keep it light otherwise; consolidation matters.</li>
+    </ul>
+  </div>
+
+  <!-- ================= WEEK 2 ================= -->
+  <div class="week-banner break-before">
+    <span class="wk">Week 2</span><span class="wt">Reinforce, simulate, and sit the exam</span>
+  </div>
+
+  <div class="day">
+    <span class="daylabel">Days 8–9 · Tool Design &amp; MCP Integration — 18%, already strong</span>
+    <div class="resline"><span class="k">Courses</span>Introduction to MCP → MCP: Advanced Topics (skim — you're at 83%)</div>
+    <div class="resline"><span class="k">Docs</span><a href="https://modelcontextprotocol.io">MCP spec</a> · <a href="https://docs.claude.com/en/docs/build-with-claude/tool-use">Tool use</a> · <a href="https://docs.claude.com/en/docs/mcp">MCP in Claude</a></div>
+    <h4>Focus only on the gaps</h4>
+    <ul class="check">
+      <li><b>Three MCP primitives:</b> Tools (model-controlled actions), Resources (app-controlled read-only data), Prompts (templates).</li>
+      <li><b>Transports:</b> stdio vs. StreamableHTTP — when each applies. Most-tested MCP detail.</li>
+      <li><b>Tool design:</b> precise descriptions &amp; input schemas; structured error returns; <code>tool_choice</code> control.</li>
+      <li><b>Security boundaries / roots</b> and least-privilege tool exposure.</li>
+    </ul>
+  </div>
+
+  <div class="day">
+    <span class="daylabel">Day 10 · Prompt Engineering &amp; Structured Output (20%) + Agent Skills</span>
+    <div class="resline"><span class="k">Courses</span>Review notes + Introduction to Agent Skills</div>
+    <div class="resline"><span class="k">Docs</span><a href="https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview">Prompt engineering</a> · <a href="https://docs.claude.com/en/docs/build-with-claude/structured-output">Structured output</a> · <a href="https://docs.claude.com/en/docs/agents-and-tools/agent-skills">Agent Skills</a></div>
+    <h4>Focus</h4>
+    <ul class="check">
+      <li>Zero / one / few-shot; XML structuring to delimit instructions vs. data.</li>
+      <li><b>Structured output:</b> JSON schema enforcement, tool-use for guaranteed structure, <b>validation + retry loops</b> (programmatic &gt; prompt-only).</li>
+      <li><b><code>SKILL.md</code> frontmatter</b> and how Skills are triggered / distributed.</li>
+    </ul>
+  </div>
+
+  <div class="day">
+    <span class="daylabel">Day 11 · Context Management &amp; Reliability — 15%, lightest</span>
+    <div class="resline"><span class="k">Course</span>AI Fluency: Framework &amp; Foundations (skim escalation/oversight parts only)</div>
+    <div class="resline"><span class="k">Docs</span><a href="https://docs.claude.com/en/docs/build-with-claude/context-windows">Context windows</a> · <a href="https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails">Reliability &amp; guardrails</a></div>
+    <h4>Focus</h4>
+    <ul class="check">
+      <li>Long-session context strategies (summarization, scoped retrieval, provenance).</li>
+      <li><b>Human-in-the-loop escalation thresholds</b> — when an agent should stop and hand off.</li>
+      <li>Confidence handling and graceful failure.</li>
+    </ul>
+  </div>
+
+  <div class="day">
+    <span class="daylabel">Day 12 · Full timed simulation</span>
+    <ul class="check">
+      <li>Sit a full 60-question / 120-minute test under real conditions (no notes, no AI, timer on).</li>
+      <li>Score it. Review <b>every</b> miss and add to your error list.</li>
+    </ul>
+  </div>
+
+  <div class="day">
+    <span class="daylabel">Day 13 · Targeted cram</span>
+    <ul class="check">
+      <li>Drill only the domains/topics still under 80%.</li>
+      <li>Read your error list end-to-end. Re-read <code>stop_reason</code> flow and the tiebreakers — they carry disproportionate weight.</li>
+    </ul>
+  </div>
+
+  <div class="day exam">
+    <span class="daylabel">Day 14 · Light review + EXAM</span>
+    <ul class="check">
+      <li>Morning: skim error list and tiebreakers only. No new material.</li>
+      <li>Sit the exam. Answer every question. Flag-and-return anything over ~2 minutes.</li>
+    </ul>
+  </div>
+
+  <!-- ================= FALLBACK ================= -->
+  <div class="week-banner break-before" style="background:var(--warn);">
+    <span class="wk">Optional</span><span class="wt">3-Week fallback (if 2 weeks is too tight)</span>
+  </div>
+  <p>Insert a full extra week between Week 1 and Week 2, then run the original Week 2 as Week 3. This adds a third practice test and hands-on repetition — the highest-return use of the extra week.</p>
+  <div class="day">
+    <span class="daylabel">Days 8–10 · Re-drill Agentic Architecture</span>
+    <ul class="plain"><li>Fresh subagent scenario set until consistently ≥ 85%.</li></ul>
+  </div>
+  <div class="day">
+    <span class="daylabel">Days 11–12 · Re-drill Claude Code Config</span>
+    <ul class="plain"><li>Build one tiny real project: a <code>CLAUDE.md</code> + a custom slash command + a hook, to cement it hands-on.</li></ul>
+  </div>
+  <div class="day">
+    <span class="daylabel">Days 13–14 · Practice test #2 + review</span>
+    <ul class="plain"><li>Then proceed into the original Week 2 sequence as your Week 3.</li></ul>
+  </div>
+
+  <!-- ================= RESOURCES ================= -->
+  <h2 class="break-before">Consolidated resource list</h2>
+  <h4>Anthropic Academy (free · Skilljar) — <a href="https://anthropic.skilljar.com/">anthropic.skilljar.com</a></h4>
+  <ul class="plain">
+    <li>Introduction to Subagents <b>(priority — weak domain)</b></li>
+    <li>Claude Code 101 → Claude Code in Action <b>(priority — weak domain)</b></li>
+    <li>Introduction to MCP → MCP: Advanced Topics</li>
+    <li>Introduction to Agent Skills</li>
+    <li>AI Fluency: Framework &amp; Foundations</li>
+    <li>Building with the Claude API <b>(done)</b></li>
+  </ul>
+  <h4>Official docs</h4>
+  <ul class="plain">
+    <li>Claude API overview — <a href="https://docs.claude.com/en/api/overview">docs.claude.com/en/api/overview</a></li>
+    <li>Claude Agent SDK — <a href="https://docs.claude.com/en/api/agent-sdk/overview">docs.claude.com/en/api/agent-sdk/overview</a></li>
+    <li>Claude Code — <a href="https://docs.claude.com/en/docs/claude-code/overview">docs.claude.com/en/docs/claude-code/overview</a></li>
+    <li>Tool use — <a href="https://docs.claude.com/en/docs/build-with-claude/tool-use">docs.claude.com/en/docs/build-with-claude/tool-use</a></li>
+    <li>MCP — <a href="https://modelcontextprotocol.io">modelcontextprotocol.io</a></li>
+    <li>Prompt engineering — <a href="https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview">docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview</a></li>
+  </ul>
+
+  <h2>Daily rhythm that makes 2 weeks realistic</h2>
+  <ul class="plain">
+    <li><b>~2 focused hours on weeknights, ~4 on weekend days.</b> Course video/reading first, then immediately drill scenario questions on that topic — active recall beats re-watching.</li>
+    <li><b>Keep the running error list.</b> It's your single most valuable asset by Day 14.</li>
+    <li><b>Weekly checkpoints (Day 7, Day 12) are non-negotiable.</b> They tell you whether to proceed or hold in the 3-week fallback.</li>
+  </ul>
+
+  <div class="footer">
+    CCA-F 2-Week Sprint Study Guide · Pass mark 720/1000 (scaled) · 60 questions / 120 minutes · Prioritized to weakest domains (Agentic Architecture, Claude Code Config).
+  </div>
+
+</div>
+</body>
+</html>
